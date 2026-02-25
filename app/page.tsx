@@ -3,6 +3,7 @@ import React from 'react';
 export default function IITBHUPage() {
   return (
     <>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
@@ -216,7 +217,7 @@ export default function IITBHUPage() {
 
         .news-controls button {
           background: none;
-          border: 1px solid #ccc;
+          border: 2px solid #ccc;
           color: #888;
           border-radius: 50%;
           width: 26px;
@@ -233,6 +234,11 @@ export default function IITBHUPage() {
         .news-controls button:hover {
           border-color: #111;
           color: #111;
+        }
+
+        .news-controls button:focus {
+          outline: 2px solid #4facfe;
+          outline-offset: 2px;
         }
 
         .hero-content {
@@ -260,6 +266,33 @@ export default function IITBHUPage() {
           font-weight: 300;
         }
         
+        /* Accessibility: Skip Link */
+        .skip-link {
+          position: absolute;
+          top: -40px;
+          left: 0;
+          background: #111;
+          color: white;
+          padding: 0.5rem 1rem;
+          text-decoration: none;
+          z-index: 100;
+          font-weight: 500;
+        }
+        .skip-link:focus {
+          top: 0;
+          outline: 3px solid #ffcc00;
+        }
+
+        /* Accessibility: Focus Styles */
+        button:focus,
+        a:focus,
+        input:focus,
+        textarea:focus,
+        select:focus {
+          outline: 3px solid #4facfe;
+          outline-offset: 2px;
+        }
+
         .btn {
           display: inline-block;
           padding: 0.8rem 1.5rem;
@@ -269,10 +302,25 @@ export default function IITBHUPage() {
           border-radius: 4px;
           font-weight: 500;
           width: fit-content;
-          border: none;
+          border: 2px solid transparent;
           cursor: pointer;
           font-size: 0.9rem;
           letter-spacing: 0.02em;
+          transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn:focus {
+          outline: 3px solid #4facfe;
+          outline-offset: 2px;
+        }
+
+        .btn:active {
+          transform: translateY(0);
         }
 
         /* Typography */
@@ -309,8 +357,13 @@ export default function IITBHUPage() {
 
         /* Faculties List */
         .faculty-list { list-style: none; }
-        .faculty-list li { padding: 1.5rem 0; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 300; letter-spacing: -0.01em; }
+        .faculty-list li { padding: 1.5rem 0; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 300; letter-spacing: -0.01em; transition: background-color 0.2s ease; }
         .faculty-list li:first-child { border-top: 1px solid #ddd; }
+        .faculty-list li:hover, .faculty-list li:focus-within {
+          background-color: var(--bg-light);
+          outline: 2px solid #4facfe;
+          outline-offset: -2px;
+        }
 
         /* Dark Section */
         .dark-section { background: var(--primary-dark); color: white; }
@@ -348,7 +401,28 @@ export default function IITBHUPage() {
         .news-img { width: 100%; height: 200px; background: #ddd; border-radius: 8px; object-fit: cover; }
         .news-meta { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
         .news-title { font-size: 1.1rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-        .read-more { font-size: 0.85rem; text-decoration: underline; margin-top: auto; cursor: pointer; color: var(--text-muted); }
+        .read-more { 
+          font-size: 0.85rem; 
+          text-decoration: underline; 
+          margin-top: auto; 
+          cursor: pointer; 
+          color: var(--text-muted);
+          background: none;
+          border: none;
+          padding: 0;
+          text-align: left;
+          font-family: inherit;
+          transition: color 0.2s ease;
+        }
+
+        .read-more:hover {
+          color: #111;
+        }
+
+        .read-more:focus {
+          outline: 2px solid #4facfe;
+          outline-offset: 2px;
+        }
 
         /* Footer */
         footer { background: var(--primary-dark); color: white; padding: 5rem 2rem 2rem; }
@@ -358,14 +432,70 @@ export default function IITBHUPage() {
         .footer-col ul li { margin-bottom: 0.8rem; font-size: 0.9rem; color: #ccc; font-weight: 300; }
         .footer-bottom { display: flex; justify-content: space-between; max-width: 1400px; margin: 2rem auto 0; font-size: 0.8rem; color: #666; font-weight: 300; }
         .footer-links { display: flex; gap: 2rem; }
+
+        /* Additional Accessibility Features */
+        nav a, footer a {
+          color: inherit;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+
+        nav a:hover, footer a:hover {
+          color: #4facfe;
+        }
+
+        nav a:focus, footer a:focus {
+          outline: 2px solid white;
+          outline-offset: 2px;
+          border-radius: 2px;
+        }
+
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+          *,
+          *::before,
+          *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+          .news-widget {
+            transition: none;
+          }
+          .btn:hover {
+            transform: none;
+          }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: more) {
+          :root {
+            --text-main: #000;
+            --text-muted: #333;
+          }
+          .btn {
+            border: 2px solid #000;
+          }
+          body {
+            border: 2px solid #000;
+          }
+        }
+
+        /* Focus-visible for better keyboard navigation */
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible {
+          outline: 3px solid #4facfe;
+          outline-offset: 2px;
+        }
       `}</style>
 
       {/* Hero Section */}
-      <div className="hero">
-        <div className="hero-bg"></div>
+      <div className="hero" role="banner">
+        <div className="hero-bg" aria-hidden="true"></div>
         <div className="hero-content-wrapper">
-          <nav className="navbar">
-            <div className="logo">IIT BHU Varanasi</div>
+          <nav className="navbar" aria-label="Main navigation">
+            <div className="logo" role="heading" aria-level="1">IIT BHU Varanasi</div>
             
             {/* The Animated Expanding News Pill */}
             <div className="news-widget-wrapper">
@@ -386,8 +516,8 @@ export default function IITBHUPage() {
                     <div className="news-expanded-footer">
                       <span className="news-expanded-link">Read more</span>
                       <div className="news-controls">
-                        <button>←</button>
-                        <button>→</button>
+                        <button aria-label="Previous news">←</button>
+                        <button aria-label="Next news">→</button>
                       </div>
                     </div>
                   </div>
@@ -402,13 +532,13 @@ export default function IITBHUPage() {
           <div className="hero-content">
             <h1>Excellence in Engineering<br />& Research</h1>
             <p>Established in 1919, the Indian Institute of Technology (BHU) is one of India's premium public institutions, located within a 1300-acre campus featuring exemplary Indo-Gothic architecture.</p>
-            <button className="btn">Download Brochure →</button>
+            <button className="btn" aria-label="Download IIT BHU brochure">Download Brochure →</button>
           </div>
         </div>
       </div>
 
       {/* Intro & Main Stats */}
-      <section className="container">
+      <section className="container" id="main-content">
         <div style={{ maxWidth: '900px', marginBottom: '4rem' }}>
           <p className="lead-text">
             IIT BHU is an institute of national importance that provides modern education to over 9,300 students. We offer flagship BTech, MTech, and doctoral programmes across 15 departments and 3 interdisciplinary schools.
@@ -606,32 +736,32 @@ export default function IITBHUPage() {
       <section className="container">
         <span className="section-subtitle">Latest Updates</span>
         <h2 className="section-title">Important dates, admissions, and announcements.</h2>
-        <button className="btn" style={{ border: '1px solid #ddd', marginBottom: '3rem' }}>All Updates →</button>
+        <button className="btn" style={{ border: '1px solid #ddd', marginBottom: '3rem' }} aria-label="View all updates">All Updates →</button>
 
         <div className="grid-4">
           <div className="news-card">
-            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="News thumbnail" className="news-img" />
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="JEE Main 2026 session 2 registrations news thumbnail" className="news-img" />
             <div className="news-meta">Admissions · Feb 25, 2026</div>
             <div className="news-title">JEE Main 2026 session 2 registrations conclude for BTech & BArch admissions.</div>
-            <div className="read-more">Read more</div>
+            <button className="read-more" aria-label="Read more about JEE Main 2026 registrations">Read more</button>
           </div>
           <div className="news-card">
-            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="News thumbnail" className="news-img" />
+            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="GATE 2026 examination results news thumbnail" className="news-img" />
             <div className="news-meta">Exams · Mar 19, 2026</div>
             <div className="news-title">GATE 2026 examination results to be released for ME/MTech and PhD admissions.</div>
-            <div className="read-more">Read more</div>
+            <button className="read-more" aria-label="Read more about GATE 2026 results">Read more</button>
           </div>
           <div className="news-card">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="News thumbnail" className="news-img" />
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="JEE Advanced 2026 application forms news thumbnail" className="news-img" />
             <div className="news-meta">Admissions · April 2026</div>
             <div className="news-title">JEE Advanced 2026 application forms expected to release for upcoming academic year.</div>
-            <div className="read-more">Read more</div>
+            <button className="read-more" aria-label="Read more about JEE Advanced 2026 applications">Read more</button>
           </div>
           <div className="news-card">
-            <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="News thumbnail" className="news-img" />
+            <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="IIT BHU placement drive news thumbnail" className="news-img" />
             <div className="news-meta">Placements · 2026</div>
             <div className="news-title">IIT BHU achieves highest package of INR 1.67 Crore per annum in recent placement drive.</div>
-            <div className="read-more">Read more</div>
+            <button className="read-more" aria-label="Read more about IIT BHU placement results">Read more</button>
           </div>
         </div>
       </section>
@@ -683,9 +813,9 @@ export default function IITBHUPage() {
         <div className="footer-bottom">
           <div>© 2026 Indian Institute of Technology (BHU) Varanasi</div>
           <div className="footer-links">
-            <span style={{ cursor: 'pointer' }}>Privacy Policy</span>
-            <span style={{ cursor: 'pointer' }}>Terms of Use</span>
-            <span style={{ cursor: 'pointer' }}>Accessibility</span>
+            <button style={{ cursor: 'pointer', background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', padding: 0, font: 'inherit' }} aria-label="View privacy policy">Privacy Policy</button>
+            <button style={{ cursor: 'pointer', background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', padding: 0, font: 'inherit' }} aria-label="View terms of use">Terms of Use</button>
+            <button style={{ cursor: 'pointer', background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', padding: 0, font: 'inherit' }} aria-label="View accessibility statement">Accessibility</button>
           </div>
         </div>
       </footer>
