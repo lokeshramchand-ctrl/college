@@ -1,0 +1,12 @@
+/* Contact/Admissions Section CSS */
+
+@media (max-width: 768px) {
+  .network-card { padding: 2rem; }
+  .network-card h4 { font-size: 1.5rem; }
+  .network-list li { margin-bottom: 0.8rem; }
+  .pill { font-size: 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  .pill { font-size: 0.65rem; }
+}
