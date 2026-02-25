@@ -1,7 +1,7 @@
-import '../styles/globals.css'
-import '../styles/hero.css'
-import '../styles/components.css'
-import '../styles/forms.css'
+import './styles/globals.css'
+import './styles/hero.css'
+import './styles/components.css'
+import './styles/forms.css'
 
 export const metadata = {
   title: "IIT BHU Varanasi",
