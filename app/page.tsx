@@ -137,6 +137,7 @@ export default function IITBHUPage() {
           .news-widget:hover { width: 100%; height: auto; }
           .news-expanded { opacity: 1 !important; pointer-events: auto !important; }
           .news-collapsed { display: none; }
+          .news-expanded-img { display: none; }
           
           .section-title { font-size: 1.8rem; }
           .section-subtitle { font-size: 0.7rem; }
@@ -153,8 +154,8 @@ export default function IITBHUPage() {
           .offer-card h3 { font-size: 1.1rem; }
           .offer-card p { font-size: 0.9rem; }
           
-          .news-card { gap: 0.75rem; }
-          .news-img { height: 150px; }
+          .news-card { gap: 0.75rem; flex-direction: column; }
+          .news-img { display: none; }
           .news-title { font-size: 1rem; }
           .news-meta { font-size: 0.7rem; }
           .read-more { font-size: 0.8rem; }
@@ -167,9 +168,10 @@ export default function IITBHUPage() {
           .footer-links { justify-content: center; gap: 1rem; flex-wrap: wrap; }
           
           .btn { padding: 0.7rem 1.2rem; font-size: 0.85rem; }
-          .person-item { padding: 1rem 0.8rem; }
+          .person-item { padding: 1rem 0.8rem; flex-direction: column; gap: 0.5rem; }
           .research-card { padding: 1.5rem; }
           .research-card h4 { font-size: 1.2rem; }
+          .research-card-header { flex-direction: column; gap: 0.5rem; }
         }
 
         /* Mobile - Extra Small Screens */
@@ -191,21 +193,23 @@ export default function IITBHUPage() {
           .faculty-list li { font-size: 0.95rem; padding: 1rem 0; }
           
           .news-widget-wrapper { top: 1rem; }
-          .news-expanded-img { width: 100px; }
+          .news-expanded-img { display: none; }
           .news-expanded-details { }
           .news-expanded-headline { font-size: 0.95rem; }
           
+          .news-img { display: none; }
           .offer-card { padding: 1.2rem; min-height: 200px; }
           
           .btn { padding: 0.65rem 1rem; font-size: 0.8rem; width: 100%; text-align: center; }
           
-          .footer-grid { gap: 1rem; }
+          .footer-grid { gap: 1rem; grid-template-columns: 1fr; }
           .footer-col ul li { font-size: 0.8rem; }
           
           .research-card-header { flex-direction: column; gap: 0.5rem; }
           .research-item { flex-direction: column; gap: 0.3rem; }
           
           .pill { font-size: 0.65rem; }
+          .person-item { flex-direction: column; gap: 0.5rem; }
         }
 
         /* --- HERO SECTION WITH ANIMATION --- */
@@ -610,7 +614,7 @@ export default function IITBHUPage() {
         .dark-section .stat-card h3 { color: white; }
         
         /* Research Focus Cards */
-        .research-card { background: var(--bg-light); padding: 2rem; border-radius: 8px; }
+        .research-card { background: var(--bg-light); padding: 2rem; border-radius: 8px; display: flex; flex-direction: column; }
         .research-card-header { display: flex; justify-content: space-between; margin-bottom: 2rem; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); }
         .research-card h4 { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 400; letter-spacing: -0.01em; }
         .research-item { display: flex; justify-content: space-between; padding: 0.8rem 0; border-top: 1px solid #ddd; font-size: 0.9rem; color: var(--text-muted); }
@@ -627,7 +631,15 @@ export default function IITBHUPage() {
         .offer-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
 
         /* People & Network */
-        .person-item { display: flex; align-items: center; gap: 1.2rem; padding: 1rem; background: var(--bg-light); border-radius: 8px; margin-bottom: 0.5rem; }
+        .person-item { 
+          display: flex; 
+          align-items: flex-start; 
+          gap: 1.2rem; 
+          padding: 1rem; 
+          background: var(--bg-light); 
+          border-radius: 8px; 
+          margin-bottom: 0.5rem; 
+        }
         .avatar { width: 48px; height: 48px; background: #ccc; border-radius: 50%; object-fit: cover; }
         .network-card { background: var(--bg-card); padding: 2rem; border-radius: 8px; }
         .network-card h4 { font-size: 1.5rem; margin: 1.5rem 0 1rem; font-weight: 400; letter-spacing: -0.01em; }
