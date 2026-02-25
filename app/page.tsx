@@ -42,13 +42,120 @@ export default function IITBHUPage() {
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
         
+        /* Responsive Images */
+        img {
+          max-width: 100%;
+          height: auto;
+          display: block;
+        }
+        
+        /* Desktop - Large Screens */
+        @media (max-width: 1440px) {
+          .container { padding: 4rem 2rem; }
+        }
+
+        /* Tablet - Medium Screens */
         @media (max-width: 1024px) {
           .grid-4 { grid-template-columns: repeat(2, 1fr); }
           .grid-3 { grid-template-columns: repeat(2, 1fr); }
+          .grid-2 { grid-template-columns: 1fr; gap: 2.5rem; }
+          .container { padding: 3rem 2rem; }
+          .navbar { padding: 1.5rem 2rem; }
+          .hero { min-height: 500px; }
+          .hero h1 { font-size: 3.5rem; }
+          .hero p { font-size: 1rem; }
+          .hero-content { padding: 0 2rem; }
+          .news-widget { width: 320px; }
+          .news-widget:hover { width: 400px; height: 140px; }
+          .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
         }
+
+        /* Mobile - Small Screens */
         @media (max-width: 768px) {
           .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 2rem; }
-          .container { padding: 3rem 1.5rem; }
+          .container { padding: 2.5rem 1.5rem; }
+          .navbar { padding: 1rem 1.5rem; flex-direction: column; gap: 1.5rem; }
+          .navbar .logo { font-size: 1rem; }
+          
+          .hero { min-height: 400px; height: auto; }
+          .hero h1 { font-size: 2.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+          .hero p { font-size: 0.95rem; margin-bottom: 1.5rem; }
+          .hero-content { padding: 0 1.5rem; }
+          
+          .news-widget-wrapper { transform: translateX(-50%); left: 50%; width: 90%; max-width: 320px; }
+          .news-widget { width: 100%; }
+          .news-widget:hover { width: 100%; height: auto; }
+          .news-expanded { opacity: 1 !important; pointer-events: auto !important; }
+          .news-collapsed { display: none; }
+          
+          .section-title { font-size: 1.8rem; }
+          .section-subtitle { font-size: 0.7rem; }
+          .lead-text { font-size: 1.2rem; }
+          
+          .stat-card { padding: 1.5rem; }
+          .stat-card h3 { font-size: 2.5rem; }
+          .stat-card p { font-size: 0.85rem; }
+          
+          .faculty-list li { font-size: 1rem; padding: 1.2rem 0; }
+          .faculty-list li span { font-size: 0.9rem; }
+          
+          .offer-card { height: auto; min-height: 250px; padding: 1.5rem; }
+          .offer-card h3 { font-size: 1.1rem; }
+          .offer-card p { font-size: 0.9rem; }
+          
+          .news-card { gap: 0.75rem; }
+          .news-img { height: 150px; }
+          .news-title { font-size: 1rem; }
+          .news-meta { font-size: 0.7rem; }
+          .read-more { font-size: 0.8rem; }
+          
+          .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; padding-bottom: 2rem; }
+          .footer-col { padding-right: 0 !important; }
+          .footer-col h5 { margin-bottom: 1rem; }
+          .footer-col ul li { margin-bottom: 0.6rem; font-size: 0.85rem; }
+          .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+          .footer-links { justify-content: center; gap: 1rem; flex-wrap: wrap; }
+          
+          .btn { padding: 0.7rem 1.2rem; font-size: 0.85rem; }
+          .person-item { padding: 1rem 0.8rem; }
+          .research-card { padding: 1.5rem; }
+          .research-card h4 { font-size: 1.2rem; }
+        }
+
+        /* Mobile - Extra Small Screens */
+        @media (max-width: 480px) {
+          .container { padding: 2rem 1rem; }
+          .navbar { padding: 1rem; }
+          .hero { min-height: 350px; }
+          .hero h1 { font-size: 2rem; margin-bottom: 1rem; }
+          .hero p { font-size: 0.9rem; margin-bottom: 1rem; }
+          .hero-content { padding: 0 1rem; max-width: 100%; }
+          
+          .section-title { font-size: 1.5rem; }
+          .lead-text { font-size: 1.1rem; line-height: 1.4; }
+          
+          .stat-card { padding: 1.2rem; }
+          .stat-card h3 { font-size: 2rem; }
+          .stat-card p { font-size: 0.8rem; }
+          
+          .faculty-list li { font-size: 0.95rem; padding: 1rem 0; }
+          
+          .news-widget-wrapper { top: 1rem; }
+          .news-expanded-img { width: 100px; }
+          .news-expanded-details { }
+          .news-expanded-headline { font-size: 0.95rem; }
+          
+          .offer-card { padding: 1.2rem; min-height: 200px; }
+          
+          .btn { padding: 0.65rem 1rem; font-size: 0.8rem; width: 100%; text-align: center; }
+          
+          .footer-grid { gap: 1rem; }
+          .footer-col ul li { font-size: 0.8rem; }
+          
+          .research-card-header { flex-direction: column; gap: 0.5rem; }
+          .research-item { flex-direction: column; gap: 0.3rem; }
+          
+          .pill { font-size: 0.65rem; }
         }
 
         /* --- HERO SECTION WITH ANIMATION --- */
@@ -481,12 +588,26 @@ export default function IITBHUPage() {
           }
         }
 
-        /* Focus-visible for better keyboard navigation */
-        button:focus-visible,
-        a:focus-visible,
-        input:focus-visible {
-          outline: 3px solid #4facfe;
-          outline-offset: 2px;
+        /* Touch-friendly interactions */
+        button, a {
+          min-height: 48px;
+          min-width: 48px;
+        }
+
+        /* Prevent zoom on input focus (iOS) */
+        input {
+          font-size: 16px;
+        }
+
+        /* Menu button visibility */
+        .menu-button {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .menu-button {
+            display: block !important;
+          }
         }
       `}</style>
 
@@ -526,7 +647,7 @@ export default function IITBHUPage() {
               </div>
             </div>
 
-            <div style={{ fontSize: '0.9rem', fontWeight: 500, letterSpacing: '0.05em' }}>Menu ≡</div>
+            <div style={{ fontSize: '0.9rem', fontWeight: 500, letterSpacing: '0.05em', display: 'none' }} className="menu-button">Menu ≡</div>
           </nav>
           
           <div className="hero-content">
