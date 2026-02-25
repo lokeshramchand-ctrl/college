@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { motion, easeInOut } from "framer-motion";
+import { motion } from "framer-motion";
 import { 
   ArrowRight, 
   BookOpen, 
@@ -17,7 +17,7 @@ export default function MinimalCollegeSPA() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Custom snappy ease for Framer Motion
-  const easePremium = [0.22, 1, 0.36, 1];
+  const easePremium = [0.22, 1, 0.36, 1] as const;
 
   // GSAP Strict Mask Reveal
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function MinimalCollegeSPA() {
 
   const slideUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: easePremium as any } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: easePremium } }
   };
 
   const staggerWrap = {
@@ -103,7 +103,7 @@ export default function MinimalCollegeSPA() {
             <div className="fade-up">
               <motion.button 
                 whileHover={{ backgroundColor: "#000", color: "#fff", paddingLeft: "2.5rem", paddingRight: "1.5rem" }}
-                transition={{ duration: 0.4, ease: easePremium }}
+                transition={{ duration: 0.4, ease: easePremium as any }}
                 className="btn-solid"
                 onClick={() => scrollTo("courses")}
               >
@@ -207,7 +207,7 @@ export default function MinimalCollegeSPA() {
                 >
                   <motion.div 
                     variants={{ rest: { width: 0 }, hover: { width: "8px" } }} 
-                    transition={{ duration: 0.3, ease: easePremium }}
+                    transition={{ duration: 0.3, ease: easePremium as any }}
                     className="list-indicator"
                   />
                   <div className="list-text">
