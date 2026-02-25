@@ -495,7 +495,7 @@ export default function IITBHUPage() {
         <div className="hero-bg" aria-hidden="true"></div>
         <div className="hero-content-wrapper">
           <nav className="navbar" aria-label="Main navigation">
-            <div className="logo" role="heading" aria-level="1">IIT BHU Varanasi</div>
+            <div className="logo" role="heading" aria-level={1}>IIT BHU Varanasi</div>
             
             {/* The Animated Expanding News Pill */}
             <div className="news-widget-wrapper">
