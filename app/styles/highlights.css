@@ -1,9 +1,0 @@
-/* Highlights/Community Section CSS */
-
-@media (max-width: 768px) {
-  .person-item { padding: 1rem 0.8rem; flex-direction: column; gap: 0.5rem; }
-}
-
-@media (max-width: 480px) {
-  .person-item { flex-direction: column; gap: 0.5rem; }
-}
