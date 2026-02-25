@@ -1,36 +1,21 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import '../styles/globals.css'
+import '../styles/hero.css'
+import '../styles/components.css'
+import '../styles/forms.css'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "IIT BHU Varanasi - Indian Institute of Technology",
-  description: "Explore excellence in engineering and research at IIT BHU. Offering BTech, MTech, MTech, and PhD programs with world-class faculty and placements.",
-  viewport: "width=device-width, initial-scale=1.0, maximum-scale=5.0",
-  authors: [{ name: "IIT BHU" }],
-};
+export const metadata = {
+  title: "IIT BHU Varanasi",
+  description: "College Information SPA"
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
-  );
+  )
 }

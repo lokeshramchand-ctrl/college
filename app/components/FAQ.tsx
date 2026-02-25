@@ -1,52 +1,50 @@
-import React from 'react';
-import '../styles/faq.css';
-
 export default function FAQ() {
-  const faqs = [
-    {
-      question: 'What is the admission process for BTech programs?',
-      answer: 'Admission to BTech programs is through JEE Main and JEE Advanced. Candidates need to clear JEE Main first, then appear for JEE Advanced for final admission.'
-    },
-    {
-      question: 'What is the average package offered at IIT BHU?',
-      answer: 'The average package offered in the latest placement season is ₹29 LPA with the highest package reaching ₹1.67 Crore per annum.'
-    },
-    {
-      question: 'Does IIT BHU offer scholarships?',
-      answer: 'Yes, IIT BHU provides merit-cum-means scholarships to 25% of undergraduate students based on eligibility criteria.'
-    },
-    {
-      question: 'What is the campus size of IIT BHU?',
-      answer: 'IIT BHU is located within a 1300-acre campus in Varanasi, featuring exemplary Indo-Gothic architecture and world-class facilities.'
-    }
-  ];
-
-  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
-
   return (
-    <section className="container" id="faq">
-      <span className="section-subtitle">Frequently Asked Questions</span>
-      <h2 className="section-title">Find answers to common questions about IIT BHU.</h2>
+    <section className="container" id="news">
+      <span className="section-subtitle">Latest Updates</span>
 
-      <div className="faq-list">
-        {faqs.map((faq, i) => (
-          <div className="faq-item" key={i}>
-            <button
-              className="faq-question"
-              onClick={() => setActiveIndex(activeIndex === i ? null : i)}
-              aria-expanded={activeIndex === i}
-            >
-              <span>{faq.question}</span>
-              <span className="faq-toggle">{activeIndex === i ? '−' : '+'}</span>
-            </button>
-            {activeIndex === i && (
-              <div className="faq-answer">
-                <p>{faq.answer}</p>
-              </div>
-            )}
+      <h2 className="section-title">
+        Important dates, admissions, and announcements.
+      </h2>
+
+      <button
+        className="btn"
+        style={{ border: '1px solid #ddd', marginBottom: '3rem' }}
+      >
+        All Updates →
+      </button>
+
+      <div className="grid-4">
+        {[
+          {
+            title:
+              'JEE Main 2026 registrations conclude for BTech & BArch.',
+            meta: 'Admissions · Feb 25, 2026',
+          },
+          {
+            title:
+              'GATE 2026 results to be released for ME/MTech admissions.',
+            meta: 'Exams · Mar 19, 2026',
+          },
+          {
+            title:
+              'JEE Advanced 2026 applications expected to release.',
+            meta: 'Admissions · April 2026',
+          },
+          {
+            title:
+              'IIT BHU achieves highest package of INR 1.67 Crore.',
+            meta: 'Placements · 2026',
+          },
+        ].map((news, i) => (
+          <div className="news-card" key={i}>
+            <div className="news-img"></div>
+            <div className="news-meta">{news.meta}</div>
+            <div className="news-title">{news.title}</div>
+            <button className="read-more">Read more</button>
           </div>
         ))}
       </div>
     </section>
-  );
+  )
 }
