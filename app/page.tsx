@@ -1,6 +1,48 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 
 export default function IITBHUPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        'home',
+        'main-content',
+        'programmes',
+        'placements',
+        'academics',
+        'campus',
+        'admissions',
+        'news',
+      ];
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setMobileMenuOpen(false);
+    }
+  };
+
   return (
     <>
       <a href="#main-content" className="skip-link">Skip to main content</a>
@@ -20,6 +62,10 @@ export default function IITBHUPage() {
           box-sizing: border-box;
           margin: 0;
           padding: 0;
+        }
+
+        html {
+          scroll-behavior: smooth;
         }
 
         body {
@@ -61,6 +107,8 @@ export default function IITBHUPage() {
           .grid-2 { grid-template-columns: 1fr; gap: 2.5rem; }
           .container { padding: 3rem 2rem; }
           .navbar { padding: 1.5rem 2rem; }
+          .nav-menu { gap: 1.5rem; }
+          .nav-menu a { font-size: 0.8rem; }
           .hero { min-height: 500px; }
           .hero h1 { font-size: 3.5rem; }
           .hero p { font-size: 1rem; }
@@ -74,8 +122,10 @@ export default function IITBHUPage() {
         @media (max-width: 768px) {
           .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 2rem; }
           .container { padding: 2.5rem 1.5rem; }
-          .navbar { padding: 1rem 1.5rem; flex-direction: column; gap: 1.5rem; }
+          .navbar { padding: 1rem 1.5rem; flex-direction: row; gap: 1.5rem; justify-content: space-between; }
           .navbar .logo { font-size: 1rem; }
+          .nav-menu { display: none !important; }
+          .mobile-menu-toggle { display: block; }
           
           .hero { min-height: 400px; height: auto; }
           .hero h1 { font-size: 2.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
@@ -196,13 +246,95 @@ export default function IITBHUPage() {
           justify-content: space-between;
           padding: 2rem 4rem;
           align-items: flex-start;
-          position: relative; 
+          position: relative;
+        }
+
+        .navbar a {
+          cursor: pointer;
         }
         
         .navbar .logo { 
           font-weight: 500; 
           font-size: 1.1rem; 
           letter-spacing: -0.01em;
+          cursor: pointer;
+        }
+
+        .nav-menu {
+          display: flex;
+          gap: 2rem;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .nav-menu a {
+          color: white;
+          text-decoration: none;
+          font-size: 0.9rem;
+          font-weight: 400;
+          letter-spacing: 0.02em;
+          padding: 0.5rem 0;
+          border-bottom: 2px solid transparent;
+          transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+          border-bottom-color: white;
+        }
+
+        .nav-menu a.active {
+          border-bottom-color: #4facfe;
+          color: #4facfe;
+        }
+
+        .mobile-menu-toggle {
+          display: none;
+          background: none;
+          border: none;
+          color: white;
+          font-size: 1.5rem;
+          cursor: pointer;
+          padding: 0.5rem;
+          z-index: 100;
+        }
+
+        .mobile-nav-menu {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(20, 21, 23, 0.95);
+          z-index: 99;
+          flex-direction: column;
+          padding-top: 5rem;
+          gap: 1rem;
+        }
+
+        .mobile-nav-menu.open {
+          display: flex;
+        }
+
+        .mobile-nav-menu a {
+          color: white;
+          text-decoration: none;
+          font-size: 1.2rem;
+          padding: 1rem 2rem;
+          border-left: 3px solid transparent;
+          transition: all 0.3s ease;
+        }
+
+        .mobile-nav-menu a:hover {
+          border-left-color: #4facfe;
+          padding-left: 2.5rem;
+        }
+
+        .mobile-nav-menu a.active {
+          border-left-color: #4facfe;
+          color: #4facfe;
+          padding-left: 2.5rem;
         }
         
         /* --- EXPANDING NEWS PILL ANIMATION --- */
@@ -612,11 +744,112 @@ export default function IITBHUPage() {
       `}</style>
 
       {/* Hero Section */}
-      <div className="hero" role="banner">
+      <div className="hero" role="banner" id="home">
         <div className="hero-bg" aria-hidden="true"></div>
         <div className="hero-content-wrapper">
           <nav className="navbar" aria-label="Main navigation">
-            <div className="logo" role="heading" aria-level={1}>IIT BHU Varanasi</div>
+            <div className="logo" role="heading" aria-level={1} onClick={() => scrollToSection('home')} style={{ cursor: 'pointer' }}>IIT BHU Varanasi</div>
+
+            {/* Desktop Navigation Menu */}
+            <div className="nav-menu">
+              <a 
+                onClick={() => scrollToSection('main-content')}
+                className={activeSection === 'main-content' ? 'active' : ''}
+              >
+                About
+              </a>
+              <a 
+                onClick={() => scrollToSection('programmes')}
+                className={activeSection === 'programmes' ? 'active' : ''}
+              >
+                Programmes
+              </a>
+              <a 
+                onClick={() => scrollToSection('academics')}
+                className={activeSection === 'academics' ? 'active' : ''}
+              >
+                Academics
+              </a>
+              <a 
+                onClick={() => scrollToSection('placements')}
+                className={activeSection === 'placements' ? 'active' : ''}
+              >
+                Placements
+              </a>
+              <a 
+                onClick={() => scrollToSection('campus')}
+                className={activeSection === 'campus' ? 'active' : ''}
+              >
+                Campus
+              </a>
+              <a 
+                onClick={() => scrollToSection('admissions')}
+                className={activeSection === 'admissions' ? 'active' : ''}
+              >
+                Admissions
+              </a>
+              <a 
+                onClick={() => scrollToSection('news')}
+                className={activeSection === 'news' ? 'active' : ''}
+              >
+                News
+              </a>
+            </div>
+
+            {/* Mobile Navigation Toggle */}
+            <button 
+              className="mobile-menu-toggle"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? '✕' : '☰'}
+            </button>
+
+            {/* Mobile Navigation Menu */}
+            <div className={`mobile-nav-menu ${mobileMenuOpen ? 'open' : ''}`}>
+              <a 
+                onClick={() => scrollToSection('main-content')}
+                className={activeSection === 'main-content' ? 'active' : ''}
+              >
+                About
+              </a>
+              <a 
+                onClick={() => scrollToSection('programmes')}
+                className={activeSection === 'programmes' ? 'active' : ''}
+              >
+                Programmes
+              </a>
+              <a 
+                onClick={() => scrollToSection('academics')}
+                className={activeSection === 'academics' ? 'active' : ''}
+              >
+                Academics
+              </a>
+              <a 
+                onClick={() => scrollToSection('placements')}
+                className={activeSection === 'placements' ? 'active' : ''}
+              >
+                Placements
+              </a>
+              <a 
+                onClick={() => scrollToSection('campus')}
+                className={activeSection === 'campus' ? 'active' : ''}
+              >
+                Campus
+              </a>
+              <a 
+                onClick={() => scrollToSection('admissions')}
+                className={activeSection === 'admissions' ? 'active' : ''}
+              >
+                Admissions
+              </a>
+              <a 
+                onClick={() => scrollToSection('news')}
+                className={activeSection === 'news' ? 'active' : ''}
+              >
+                News
+              </a>
+            </div>
             
             {/* The Animated Expanding News Pill */}
             <div className="news-widget-wrapper">
@@ -646,8 +879,6 @@ export default function IITBHUPage() {
 
               </div>
             </div>
-
-            <div style={{ fontSize: '0.9rem', fontWeight: 500, letterSpacing: '0.05em', display: 'none' }} className="menu-button">Menu ≡</div>
           </nav>
           
           <div className="hero-content">
@@ -688,7 +919,7 @@ export default function IITBHUPage() {
       </section>
 
       {/* Faculties/Courses Section */}
-      <section className="container grid-2">
+      <section className="container grid-2" id="programmes">
         <div>
           <span className="section-subtitle">Find the programme that's right for you</span>
           <h2 className="section-title">
@@ -708,7 +939,7 @@ export default function IITBHUPage() {
       </section>
 
       {/* Dark Impact / Placement Section */}
-      <section className="dark-section">
+      <section className="dark-section" id="placements">
         <div className="container">
           <span className="section-subtitle" style={{ color: '#888' }}>Driving Career Success</span>
           <h2 className="section-title">
@@ -742,7 +973,7 @@ export default function IITBHUPage() {
       </section>
 
       {/* Departments Focus */}
-      <section className="container">
+      <section className="container" id="academics">
         <span className="section-subtitle">Academic Excellence</span>
         <h2 className="section-title">
           Our researchers and students work across 15 specialised departments to address the most pressing technological questions of our time.
@@ -799,7 +1030,7 @@ export default function IITBHUPage() {
       </section>
 
       {/* What We Offer / Campus Life */}
-      <section className="container">
+      <section className="container" id="campus">
         <span className="section-subtitle">Campus Life</span>
         <div className="grid-3">
           <div className="offer-card offer-1">
@@ -824,7 +1055,7 @@ export default function IITBHUPage() {
       </section>
 
       {/* Accepted Exams */}
-      <section className="container bg-light">
+      <section className="container bg-light" id="admissions">
         <span className="section-subtitle">Admissions</span>
         <h2 className="section-title">
           Admission to the majority of our programmes is determined through rigorous national-level entrance examinations.
@@ -854,7 +1085,7 @@ export default function IITBHUPage() {
       </section>
 
       {/* Latest News */}
-      <section className="container">
+      <section className="container" id="news">
         <span className="section-subtitle">Latest Updates</span>
         <h2 className="section-title">Important dates, admissions, and announcements.</h2>
         <button className="btn" style={{ border: '1px solid #ddd', marginBottom: '3rem' }} aria-label="View all updates">All Updates →</button>
