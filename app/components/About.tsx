@@ -52,9 +52,6 @@ export default function About() {
             {card.items.map((item, j) => (
               <div className="research-item" key={j}>
                 <span>{item}</span>
-                <span style={{ color: '#ccc', letterSpacing: '2px' }}>
-                  ||||||
-                </span>
               </div>
             ))}
           </div>
