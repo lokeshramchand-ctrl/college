@@ -1,0 +1,54 @@
+/* BUTTON */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: white;
+  color: black;
+  border-radius: 4px;
+  font-weight: 500;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* READ MORE */
+.read-more {
+  font-size: 0.85rem;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+/* ACCESSIBILITY */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid #4facfe;
+  outline-offset: 2px;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #111;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #ffcc00;
+}
