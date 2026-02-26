@@ -19,7 +19,10 @@ export default function Hero({
 
       <div className="hero-content-wrapper">
         <nav className="navbar">
-          <div className="logo" onClick={() => scrollToSection('home')}>
+          <div 
+            className="logo cursor-pointer" 
+            onClick={() => scrollToSection('home')}
+          >
             IIT BHU Varanasi
           </div>
 
@@ -36,7 +39,7 @@ export default function Hero({
               <a
                 key={id}
                 onClick={() => scrollToSection(id)}
-                className={activeSection === id ? 'active' : ''}
+                className={`transition-all duration-300 ${activeSection === id ? 'active' : ''}`}
               >
                 {label}
               </a>
@@ -46,6 +49,7 @@ export default function Hero({
           <button
             className="mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? '✕' : '☰'}
           </button>
@@ -63,7 +67,7 @@ export default function Hero({
               <a
                 key={id}
                 onClick={() => scrollToSection(id)}
-                className={activeSection === id ? 'active' : ''}
+                className={`transition-all duration-300 ${activeSection === id ? 'active' : ''}`}
               >
                 {label}
               </a>
@@ -72,15 +76,15 @@ export default function Hero({
         </nav>
 
         <div className="hero-content">
-          <h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
             Excellence in Engineering
             <br />
             & Research
           </h1>
-          <p>
+          <p className="text-sm sm:text-base text-gray-600 max-w-2xl">
             Established in 1919, IIT BHU is one of India's premium institutions.
           </p>
-          <button className="btn">Download Brochure →</button>
+
         </div>
       </div>
     </div>

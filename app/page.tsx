@@ -53,21 +53,23 @@ export default function Page() {
   }
 
   return (
-    <>
+    <div className="w-full overflow-x-hidden">
       <Hero
         activeSection={activeSection}
         scrollToSection={scrollToSection}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
       />
-      <Highlights />
-      <Courses />
-      <Placements />
-      <About />
-      <Testimonials />
-      <Contact />
-      <FAQ />
+      <div className="w-full px-4 sm:px-6 md:px-8">
+        <Highlights />
+        <Courses />
+        <Placements />
+        <About />
+        <Testimonials />
+        <Contact />
+        <FAQ />
+      </div>
       <Footer />
-    </>
+    </div>
   )
 }
