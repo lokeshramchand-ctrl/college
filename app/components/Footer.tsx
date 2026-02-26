@@ -224,11 +224,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="footer-bottom">
             <div className="footer-copyright">
               © 2026 Indian Institute of Technology (BHU) Varanasi
             </div>
-          </div>
         </div>
       </footer>
     </>
